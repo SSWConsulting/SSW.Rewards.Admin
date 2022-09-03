@@ -69,7 +69,7 @@
             a.IsCorrect = false;
         }
     }
-    private async Task Submit()
+    private void Submit()
     {
         if (Dto.Answers.Where(x => x.IsCorrect).Count() != 1)
         {

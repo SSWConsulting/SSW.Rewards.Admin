@@ -64,7 +64,7 @@
     public EventCallback<bool> OnSaveClicked { get; set; }
 
     [Parameter]
-    public AdminQuizDetailsDto Model { get; set; }
+    public AdminQuizDetailsDto Model { get; set; } = new();
     private readonly DialogOptions disableBackdropClick = new() { DisableBackdropClick = true, FullWidth = true, MaxWidth = MaxWidth.Large };
     private async Task AddQuestionDialog(DialogOptions options)
     {

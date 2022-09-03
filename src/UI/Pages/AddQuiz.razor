@@ -23,8 +23,6 @@
 @code {
 
     private MudForm form = new();
-    private string[] errors = { };
-    private bool success = false;
     private AdminQuizDetailsDto _model = new AdminQuizDetailsDto { Questions = new List<AdminQuizQuestionDto>() };
     private async Task DoThing(bool b)
     {
@@ -47,7 +45,7 @@
         {
             exception.Redirect();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             throw;
         }

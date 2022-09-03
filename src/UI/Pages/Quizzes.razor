@@ -78,7 +78,7 @@
         await base.OnInitializedAsync();
         await GetQuizzes();
     }
-    private async Task OnRowClicked(TableRowClickEventArgs<AdminQuizDto> obj)
+    private void OnRowClicked(TableRowClickEventArgs<AdminQuizDto> obj)
     {
         NavManager.NavigateTo($"edit-quiz/{obj.Item.Id}");
     }
