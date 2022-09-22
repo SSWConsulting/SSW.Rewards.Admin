@@ -80,5 +80,6 @@ jobs:
         with:
           source_dir: "ui"
           container_name: "$web"
+          account_name: ${{ steps.bicep.outputs.storageAccountName }}
           sas_token: ${{ steps.storage.outputs.sastoken }}
           sync: "true"
