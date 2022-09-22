@@ -7,6 +7,16 @@ on:
       resourceGroupName:
         required: true
         type: string
+    secrets:
+      CLIENT_ID:
+        required: true
+        type: string
+      TENANT_ID:
+        required: true
+        type: string
+      SUBSCRIPTION_ID:
+        required: true
+        type: string
 
 permissions:
   id-token: write
