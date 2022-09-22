@@ -73,7 +73,7 @@ jobs:
             --name '$web' `
             --permissions acdrw `
             --expiry $expiry --https-only --permissions dlrw -o tsv
-          echo "::set-output name=sastoken::$token"
+          Write-Output "::set-output name=sastoken::$($token)"
 
       - name: Upload UI
         uses: bacongobbler/azure-blob-storage-upload@main
