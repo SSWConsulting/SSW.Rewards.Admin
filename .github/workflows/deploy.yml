@@ -7,8 +7,15 @@ on:
       resourceGroupName:
         required: true
         type: string
+    permissions:
+      id-token: write
+      contents: read
     secrets:
-      AZURE_CREDENTIALS:
+      CLIENT_ID:
+        required: true
+      TENANT_ID:
+        required: true
+      SUBSCRIPTION_ID:
         required: true
 
 jobs:
@@ -25,7 +32,10 @@ jobs:
 
     - uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ env.CLIENT_ID }}
+        tenant-id: ${{ env.TENANT_ID }}
+        subscription-id: ${{ env.SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
 
     - name: Deploy Bicep
       id: bicep
