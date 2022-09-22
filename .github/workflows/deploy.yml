@@ -39,44 +39,41 @@ jobs:
 
       - name: Deploy Bicep
         id: bicep
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            $out = az deployment group create `
-              --resource-group ${{ inputs.resourceGroupName }} `
-              --template-file .\infra\main.bicep `
-              --parameters `
-                environment=${{ inputs.environment }} `
-              | convertfrom-json `
-              | foreach properties `
-              | foreach outputs
+        shell: pwsh
+        run: |
+          $out = az deployment group create `
+            --resource-group ${{ inputs.resourceGroupName }} `
+            --template-file .\infra\main.bicep `
+            --parameters environment=${{ inputs.environment }} `
+            | convertfrom-json `
+            | foreach properties `
+            | foreach outputs
 
-            $out | Get-Member -MemberType NoteProperty | ForEach-Object {
-              echo "::set-output name=$_.name::$out.$name.value"
-            }
+          $out | Get-Member -MemberType NoteProperty | ForEach-Object {
+            echo "::set-output name=$_.name::$out.$name.value"
+          }
 
       - name: Enable Static Website on Azure Storage
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az storage blob service-properties update `
-              --account-name ${{ steps.bicep.outputs.storageAccountName }} `
-              --static-website `
-              --404-document index.html `
-              --index-document index.html
+        id: enable-static-site
+        shell: pwsh
+        run: |
+          az storage blob service-properties update `
+            --account-name ${{ steps.bicep.outputs.storageAccountName }} `
+            --static-website `
+            --404-document index.html `
+            --index-document index.html
 
       - name: Get SAS key
-        uses: azure/CLI@v1
         id: storage
-        with:
-          inlineScript: |
-            $expiry = (Get-Date -AsUTC).AddMinutes(10).ToString('yyyy-MM-ddTHH:mm:ssZ')
-            $token = az storage container generate-sas `
-              --account-name ${{ steps.bicep.outputs.storageAccountName }} `
-              --name '$web' `
-              --permissions acdrw `
-              --expiry $expiry --https-only --permissions dlrw -o tsv
-            echo "::set-output name=sastoken::$token"
+        shell: pwsh
+        run: |
+          $expiry = (Get-Date -AsUTC).AddMinutes(10).ToString('yyyy-MM-ddTHH:mm:ssZ')
+          $token = az storage container generate-sas `
+            --account-name ${{ steps.bicep.outputs.storageAccountName }} `
+            --name '$web' `
+            --permissions acdrw `
+            --expiry $expiry --https-only --permissions dlrw -o tsv
+          echo "::set-output name=sastoken::$token"
 
       - name: Upload UI
         uses: bacongobbler/azure-blob-storage-upload@main
