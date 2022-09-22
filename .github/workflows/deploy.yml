@@ -45,12 +45,12 @@ jobs:
             --resource-group ${{ inputs.resourceGroupName }} `
             --template-file .\infra\main.bicep `
             --parameters environment=${{ inputs.environment }} `
-            | convertfrom-json `
-            | foreach properties `
-            | foreach outputs
+            | convertfrom-json | foreach properties | foreach outputs
 
-          $out | Get-Member -MemberType NoteProperty | ForEach-Object {
-            Write-Output "::set-output name=$_.name::$($_.value)"
+          $out.PSObject.Properties | ForEach-Object {
+              $name = $_.Name
+              $value = $_.Value.value
+              Write-Output "::set-output name=$($name)::$($value)"
           }
 
       - name: Enable Static Website on Azure Storage
