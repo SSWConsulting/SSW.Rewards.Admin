@@ -50,7 +50,7 @@ jobs:
             | foreach outputs
 
           $out | Get-Member -MemberType NoteProperty | ForEach-Object {
-            echo "::set-output name=$_.name::$out.$name.value"
+            Write-Output "::set-output name=$_.name::$($_.value)"
           }
 
       - name: Enable Static Website on Azure Storage
