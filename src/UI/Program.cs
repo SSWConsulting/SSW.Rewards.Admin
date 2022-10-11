@@ -23,6 +23,22 @@ public class Program
             throw new NullReferenceException("No API base URL provided");
         }
 
+        string? identityUrl = builder.Configuration["Local:Authority"];
+        if (identityUrl == null)
+        {
+            throw new NullReferenceException("No Authority URL provided");
+        }
+
+        const string identityClientName = "IdentityClient";
+        builder.Services.AddHttpClient(
+            identityClientName,
+            o =>
+            {
+                o.BaseAddress = new Uri(identityUrl);
+                o.DefaultRequestHeaders.Add("Accept", "application/json");
+            })
+            .AddHttpMessageHandler(sp => sp.GetRequiredService<CustomAuthorizationMessageHandler>());
+
         // register services from nswag
         const string generatedClientName = "generatedClient";
         builder.Services.AddHttpClient(generatedClientName)
