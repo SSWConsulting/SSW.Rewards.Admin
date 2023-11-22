@@ -159,7 +159,7 @@
         try
         {
             _loading = true;
-            await Task.Delay(250);
+            //await Task.Delay(250);
             _model = (await _client.AdminListAsync(true)).Achievements;
             _loading = false;
         }
