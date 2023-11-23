@@ -68,7 +68,7 @@
                 "Deleting will prevent future users from claiming points for this reward")
             ).Result;
 
-        if (!result.Cancelled && (bool) result.Data)
+        if (!result.Canceled && (bool) result.Data)
         {
             MudDialog?.Close(DialogResult.Ok(Dto.Id));
         }

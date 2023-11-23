@@ -96,7 +96,7 @@
         var parameters = new DialogParameters { ["Dto"]=item };
         var dialog = DialogService.Show<RewardsEditDialog>("Edit a Reward", parameters);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             switch (result.Data)
             {

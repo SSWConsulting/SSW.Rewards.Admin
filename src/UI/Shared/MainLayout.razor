@@ -50,8 +50,7 @@
 
     private async Task BeginSignOut(MouseEventArgs args)
     {
-        await NavigateToLogout();
-        Navigation.NavigateTo("authentication/logout");
+        Navigation.NavigateToLogout("authentication/logout");
     }
     
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -2,7 +2,6 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using SSW.Rewards.Admin.UI.Components.Dialogs.Confirmations
-@using SSW.Rewards.Admin.UI.Components.Dialogs.Skills
 @using SSW.Rewards.Admin.UI.Components
 
 @attribute [Authorize]
@@ -123,7 +122,7 @@
                 "Deleting will remove this skill from all users")
             ).Result;
 
-        if (!result.Cancelled && (bool) result.Data)
+        if (!result.Canceled && (bool) result.Data)
         {
             await _client.DeleteSkillAsync(new DeleteSkillCommand
             {

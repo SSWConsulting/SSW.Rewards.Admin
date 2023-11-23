@@ -73,7 +73,7 @@
         parameters.Add("Dto", q);
         var dialog = DialogService.Show<QuizQuestionDialog>("Create a quiz question", parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             // Add the Reward
             if (result.Data is AdminQuizQuestionDto dto)

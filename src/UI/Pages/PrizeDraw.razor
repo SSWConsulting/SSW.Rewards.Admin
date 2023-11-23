@@ -54,13 +54,13 @@ else
             <MudCheckBox T="bool" 
                          Checked="_balanceRequired"
                          Label="+Points Balance Required"
-                         CheckedChanged="async (e) => { _balanceRequired = e; await LoadEligiblePlayers(); }"/>
+                         CheckedChanged="async (e) => { _balanceRequired = e??false; await LoadEligiblePlayers(); }"/>
         </MudItem>
                 <MudItem>
                     <MudCheckBox T="bool" 
                                  Checked="_filterStaff"
                                  Label="Filter staff"
-                                 CheckedChanged="async (e) => { _filterStaff = e; await LoadEligiblePlayers(); }"/>
+                                 CheckedChanged="async (e) => { _filterStaff = e??false; await LoadEligiblePlayers(); }"/>
                 </MudItem>
     </MudGrid>
     
