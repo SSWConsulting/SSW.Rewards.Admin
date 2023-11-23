@@ -50,7 +50,7 @@
 
     private async Task BeginSignOut(MouseEventArgs args)
     {
-        await SignOutManager.SetSignOutState();
+        await NavigateToLogout();
         Navigation.NavigateTo("authentication/logout");
     }
     

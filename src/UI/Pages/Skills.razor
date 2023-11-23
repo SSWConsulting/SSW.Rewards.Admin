@@ -79,7 +79,7 @@
     {
     var dialog = DialogService.Show<SSW.Rewards.Admin.UI.Components.Dialogs.Skills.AddSkillDialog>("Create a Skill", options);
     var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             // Add the Skill
             if (result.Data is string skill)

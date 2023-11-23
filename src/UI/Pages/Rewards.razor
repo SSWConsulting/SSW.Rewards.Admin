@@ -132,7 +132,7 @@
     {
         var dialog = DialogService.Show<AddRewardDialog>("Create a Reward", options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             // Add the Reward
             if (result.Data is AddRewardCommand dto)

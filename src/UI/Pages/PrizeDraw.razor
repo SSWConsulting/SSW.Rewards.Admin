@@ -84,7 +84,7 @@ else
                         <MudChip
                             Size="@(IsWinner(player.p) ? Size.Large : Size.Small)"
                             Variant="@(IsWinner(player.p) ? Variant.Filled : Variant.Text)"
-                            Icon="@(IsWinner(player.p) ? Icons.Filled.Celebration : null)"
+                            Icon="@(IsWinner(player.p) ? Icons.Material.Filled.Celebration : null)"
                             Color="@_colors[player.index % _colors.Length]">@(player.p.Name + (_balanceRequired ? $" ({player.p.Balance})" : string.Empty))</MudChip>
                     }   
                 }
