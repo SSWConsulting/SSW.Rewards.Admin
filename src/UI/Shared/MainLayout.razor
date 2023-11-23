@@ -5,7 +5,6 @@
 @inherits LayoutComponentBase
 
 @inject NavigationManager Navigation
-@inject SignOutSessionStateManager SignOutManager
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" Theme="AdminPortalMudTheme.Theme"/>
 <MudDialogProvider/>
@@ -48,7 +47,7 @@
         _drawerOpen = !_drawerOpen;
     }
 
-    private async Task BeginSignOut(MouseEventArgs args)
+    private void BeginSignOut(MouseEventArgs args)
     {
         Navigation.NavigateToLogout("authentication/logout");
     }
