@@ -161,11 +161,9 @@ else
     private List<EligibleUserDto>? _players = new();
     private IEnumerable<RewardViewModel>? _rewards = Enumerable.Empty<RewardViewModel>();
     private List<AchievementDto>? _achievements = new();
-    RewardViewModel? _selectedReward;
     AchievementDto? _selectedAchievement;
     string? _selectedRewardCode;
     private LeaderboardFilter _filter = LeaderboardFilter.Today;
-    private bool _balanceRequired;
     private bool _filterStaff = true;
     private EligibleUserDto? _prizeWinner;
     
