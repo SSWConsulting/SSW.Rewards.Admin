@@ -1,0 +1,36 @@
+﻿@page "/achivementusers/{id}"
+
+@inject AchivementClient _client
+
+<MudText Typo="Typo.h2">Users who have this achievement</MudText>
+
+@if (_loading)
+{
+    <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+}
+else
+{
+
+}
+
+@code 
+{
+    private bool _loading = true;
+    private string _achievementName = string.Empty;
+
+    private IEnumerable<AchivementUserDto> _users = Enumerable.Empty<AchivementUserDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _loading = true;
+
+        var achievementUsers = await _client.GetAchievementUsersAsync(id, CancellationToken.None);
+
+        _achievementName = achievementUsers.AchievementName;
+
+        _users = achievementUsers.Users;
+
+        _loading = false;
+    }
+}

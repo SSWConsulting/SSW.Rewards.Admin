@@ -11,6 +11,7 @@
 @inject IAchievementClient _client
 @inject IDialogService DialogService
 @inject ISnackbar SnackBar
+@inject NavigationManager NavigationManager
 
 <MudText Typo="Typo.h2">Achievements</MudText>
 <MudText Typo="Typo.body1">All achievevements available for scanning</MudText>
@@ -149,6 +150,10 @@
                         IsMultiscanEnabled = dto.IsMultiScanEnabled??false
                     });
                 SnackBar.Add($"Achievement: '{dto.Name}' saved", Severity.Success);
+            }
+            else if (result.Data is int id)
+            {
+                NavigationManager.NavigateTo($"/achievements/{id}");
             }
             await GetAchievements();
         }
