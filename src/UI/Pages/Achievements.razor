@@ -128,6 +128,10 @@
                 });
                 SnackBar.Add($"Achievement claimed", Severity.Success);
             }
+            else if (result.Data is ViewUsers view)
+            {
+                NavigationManager.NavigateTo($"/achivementusers/{view.AchievementId}");
+            }
             await GetAchievements();
         }
     }
@@ -136,6 +140,9 @@
     {
         var dialog = DialogService.Show<AddAchievementsDialog>("Create an Achievement", options);
         var result = await dialog.Result;
+        
+        Console.WriteLine("Got dialog data");
+        
         if (!result.Canceled)
         {
             if (result.Data is AchievementAdminViewModel dto)
@@ -151,11 +158,11 @@
                     });
                 SnackBar.Add($"Achievement: '{dto.Name}' saved", Severity.Success);
             }
-            else if (result.Data is int id)
-            {
-                NavigationManager.NavigateTo($"/achievements/{id}");
-            }
             await GetAchievements();
+        }
+        else
+        {
+            Console.WriteLine("Dialog was cancelled");
         }
     }
 

@@ -107,6 +107,9 @@
 
     private void ViewUsers()
     {
-        MudDialog?.Close(DialogResult.Ok(dto.Id));
+        MudDialog?.Close(DialogResult.Ok(new ViewUsers
+        {
+            AchievementId = dto.Id
+        }));
     }
 }
